@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turistiando CG</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Unbounded:wght@300;400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<nav id="nav">
+  <img src="./img/logo.png" alt="Turistiando CG" class="nav-logo" onclick="goHome()">
+  <ul class="nav-links" id="nav-links">
+    <li><a onclick="goHome()" data-es="Inicio" data-en="Home">Inicio</a></li>
+    <li><a onclick="openZone('cg')" data-es="Casas Grandes" data-en="Casas Grandes">Casas Grandes</a></li>
+    <li><a onclick="openZone('cj')" data-es="Col. Juárez" data-en="Col. Juárez">Col. Juárez</a></li>
+    <li><a onclick="openZone('mo')" data-es="Mata Ortiz" data-en="Mata Ortiz">Mata Ortiz</a></li>
+    <li><a onclick="openZone('ls')" data-es="La Sierra" data-en="The Sierra">La Sierra</a></li>
+    <li><a onclick="openZone('sd')" data-es="San Diego" data-en="San Diego">San Diego</a></li>
+  </ul>
+  <button class="nav-back" id="nav-back" style="display:none" onclick="goHome()" data-es="← Inicio" data-en="← Home">← Inicio</button>
+  <div class="lang-switcher" id="lang-switcher">
+    <button class="lang-btn active" id="btn-es" onclick="setLang('es')">🌐 ES</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+<div class="page active" id="p-home">
+  <section class="home-hero">
+    <div class="home-hero-bg" style="background-image:url('./img/casas-bg.jpeg')"></div>
+    <div class="home-hero-overlay"></div>
+
+    <!-- Animated particles -->
+    <div class="hero-particles" id="hero-particles"></div>
+
+    <div class="home-hero-content">
+      <img src="./img/logo.png" class="home-logo" alt="Turistiando CG">
+
+      <div class="hero-badge-row">
+        <span class="hero-badge">🌵 Chihuahua</span>
+        <span class="hero-badge-sep">·</span>
+        <span class="hero-badge">🏛️ Pueblo Mágico</span>
+        <span class="hero-badge-sep">·</span>
+        <span class="hero-badge">🌍 UNESCO</span>
+      </div>
+
+      <p class="home-tagline" data-es="Donde el pasado <em>respira</em>" data-en="Where the past <em>breathes</em>">Donde el pasado <em>respira</em></p>
+
+      <div class="hero-divider">
+        <span class="hero-div-line"></span>
+        <span class="hero-div-icon">◆</span>
+        <span class="hero-div-line"></span>
+      </div>
+
+      <p class="hero-intro-text">
+        Hace más de <strong>700 años</strong>, una civilización extraordinaria construyó en el desierto chihuahuense 
+        la ciudad más sofisticada del norte de América: <strong>Paquimé</strong>. 
+        Con agua potable, drenaje y comercio que llegaba hasta el Pacífico, 
+        su legado vive hoy en cada olla de barro de Mata Ortiz, 
+        en cada piedra de Colonia Juárez y en el horizonte infinito de la sierra.
+      </p>
+
+      <!-- Stats row -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">700+</span>
+          <span class="hero-stat-lbl" data-es="Años de historia" data-en="Years of history">Años de historia</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">1998</span>
+          <span class="hero-stat-lbl" data-es="Declaración UNESCO" data-en="UNESCO Declaration">Declaración UNESCO</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">400+</span>
+          <span class="hero-stat-lbl" data-es="Artesanos en Mata Ortiz" data-en="Artisans in Mata Ortiz">Artesanos en Mata Ortiz</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">5</span>
+          <span class="hero-stat-lbl" data-es="Destinos únicos" data-en="Unique destinations">Destinos únicos</span>
+        </div>
+      </div>
+
+      <a href="#zonas" class="hero-cta-btn" onclick="document.querySelector('.zones-section').scrollIntoView({behavior:'smooth'})">
+        <span data-es="Explorar la región" data-en="Explore the region">Explorar la región</span>
+        <span class="hero-cta-arrow">↓</span>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint">
+      <span class="scroll-hint-line"></span>
+      <span class="scroll-hint-text">scroll</span>
+    </div>
+  </section>
+  <section class="zones-section">
+    <h2 class="zones-title" data-es="Elige tu <span>Destino</span>" data-en="Choose your <span>Destination</span>">Elige tu <span>Destino</span></h2>
+    <div class="zones-grid">
+
+      <div class="zone-card" onclick="openZone('cg')">
+        <img class="zone-card-img" src="./img/pages/card_casas_grandes.png" alt="Casas Grandes">
+        <div class="zone-card-overlay"></div>
+        <div class="zone-card-body">
+          <span class="zone-tag">Pueblo M&aacute;gico</span>
+          <h3 class="zone-name">Casas Grandes</h3>
+          <div class="zone-pills">
+            <span class="zone-pill">📍 Lugares</span>
+            <span class="zone-pill">🏨 Hoteles</span>
+            <span class="zone-pill">🍽️ Restaurantes</span>
+            <span class="zone-pill">🏺 Artesan&iacute;as</span>
+          </div>
+          <button class="zone-btn" data-es="Explorar →" data-en="Explore →">Explorar →</button>
+        </div>
+      </div>
+
+      <div class="zone-card" onclick="openZone('cj')">
+        <img class="zone-card-img" src="./img/pages/card_colonia_juarez.png" alt="Colonia Juárez">
+        <div class="zone-card-overlay"></div>
+        <div class="zone-card-body">
+          <span class="zone-tag">Colonia Hist&oacute;rica · 1885</span>
+          <h3 class="zone-name">Colonia Ju&aacute;rez</h3>
+          <div class="zone-pills">
+            <span class="zone-pill">📍 Lugares</span>
+            <span class="zone-pill">🏨 Hospedaje</span>
+            <span class="zone-pill">🍽️ Restaurantes</span>
+          </div>
+          <button class="zone-btn" data-es="Explorar →" data-en="Explore →">Explorar →</button>
+        </div>
+      </div>
+
+      <div class="zone-card" onclick="openZone('mo')">
+        <img class="zone-card-img" src="./img/pages/card_mata_ortiz.png" alt="Mata Ortiz">
+        <div class="zone-card-overlay"></div>
+        <div class="zone-card-body">
+          <span class="zone-tag">Arte &amp; Cer&aacute;mica</span>
+          <h3 class="zone-name">Juan Mata Ortiz</h3>
+          <div class="zone-pills">
+            <span class="zone-pill">🏺 Cer&aacute;mica</span>
+            <span class="zone-pill">🏨 Hospedaje</span>
+            <span class="zone-pill">🍽️ Antojitos</span>
+          </div>
+          <button class="zone-btn" data-es="Explorar →" data-en="Explore →">Explorar →</button>
+        </div>
+      </div>
+
+      <div class="zone-card" onclick="openZone('ls')">
+        <img class="zone-card-img" src="./img/pages/card_la_sierra.png" alt="La Sierra">
+        <div class="zone-card-overlay"></div>
+        <div class="zone-card-body">
+          <span class="zone-tag">Naturaleza &amp; Aventura</span>
+          <h3 class="zone-name">La Sierra</h3>
+          <div class="zone-pills">
+            <span class="zone-pill">🏕️ Camping</span>
+            <span class="zone-pill">🧗 Aventura</span>
+            <span class="zone-pill">🌿 Naturaleza</span>
+          </div>
+          <button class="zone-btn" data-es="Explorar →" data-en="Explore →">Explorar →</button>
+        </div>
+      </div>
+
+      <div class="zone-card" onclick="openZone('sd')">
+        <img class="zone-card-img" src="./img/pages/card_san_diego.png" alt="San Diego">
+        <div class="zone-card-overlay"></div>
+        <div class="zone-card-body">
+          <span class="zone-tag">Historia &amp; Campo</span>
+          <h3 class="zone-name">San Diego</h3>
+          <div class="zone-pills">
+            <span class="zone-pill">🏛️ Hacienda</span>
+            <span class="zone-pill">🌾 Campo</span>
+          </div>
+          <button class="zone-btn" data-es="Explorar →" data-en="Explore →">Explorar →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+<div class="page" id="p-cg">
+  <div class="zone-hero">
+    <img class="zone-hero-img" src="./img/pages/esferas_verano.png" alt="Casas Grandes">
+    <div class="zone-hero-overlay"></div>
+    <div class="zone-hero-body">
+      <span class="zone-hero-tag" data-es="Pueblo M&aacute;gico &middot; Chihuahua" data-en="Magic Town &middot; Chihuahua">Pueblo M&aacute;gico &middot; Chihuahua</span>
+      <h1 class="zone-hero-title">Casas <span>Grandes</span></h1>
+      <p class="zone-hero-desc">Cuna de la civilizaci&oacute;n Paqu&iacute;me, arte en cer&aacute;mica y tradici&oacute;n norte&ntilde;a.</p>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs-cg">
+      <button class="tab-btn active" onclick="switchTab('cg','lugares',this)" data-es="📍 Lugares" data-en="📍 Places">📍 Lugares</button>
+      <button class="tab-btn" onclick="switchTab('cg','hospedaje',this)" data-es="🏨 Hospedaje" data-en="🏨 Lodging">🏨 Hospedaje</button>
+      <button class="tab-btn" onclick="switchTab('cg','gastro',this)" data-es="🍽️ Gastronom&iacute;a" data-en="🍽️ Gastronomy">🍽️ Gastronom&iacute;a</button>
+      <button class="tab-btn" onclick="switchTab('cg','arte',this)" data-es="🏺 Artesan&iacute;as" data-en="🏺 Crafts">🏺 Artesan&iacute;as</button>
+    </div>
+  </div>
+
+  <div class="tab-panel dark active" id="cg-lugares">
+    <span class="s-lbl gold">Casas Grandes</span>
+    <h2 class="s-title light" data-es="Lugares que <span class="g">Visitar</span>" data-en="Places to <span class="g">Visit</span>">Lugares que <span class="g">Visitar</span></h2>
+    <div class="grid">
+      <div class="pc dk fade-in">
+<div class="mi-swap" style="height:260px;" data-multi="1">
+      <img class="visible" src="./img/pages/esferas_verano.png" alt="Esferas verano">
+      <img src="./img/pages/esferas_nieve.png" alt="Esferas nieve">
+      <img src="./img/pages/letrero_cg.png" alt="Letrero CG">
+      <div class="swap-dots">
+        <span class="swap-dot active"></span>
+        <span class="swap-dot"></span>
+        <span class="swap-dot"></span>
+      </div>
+    </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Entrada a Casas Grandes" data-en="📍 Casas Grandes Entrance">📍 Entrada a Casas Grandes</span>
+          <h3 class="pc-name l">Las Esferas</h3>
+          <p class="pc-desc s" data-es="Formaciones de piedra perfectamente redondas de origen misterioso. La primera parada obligada al llegar al municipio, impresionantes en verano y espectaculares bajo la nieve." data-en="Perfectly round stone formations of mysterious origin. The first must-stop upon arriving, impressive in summer and spectacular under snow.">Formaciones de piedra perfectamente redondas de origen misterioso. La primera parada obligada al llegar al municipio, impresionantes en verano y espectaculares bajo la nieve.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+<div class="mi-swap" style="height:260px;" data-multi="1">
+      <span class="pc-bdg" style="z-index:5;position:absolute;top:0.8rem;left:0.8rem;">UNESCO 1998</span>
+      <img class="visible" src="./img/pages/paquime_aerea.png" alt="Paquimé aérea">
+      <img src="./img/pages/paquime_ruinas.png" alt="Ruinas">
+      <img src="./img/pages/paquime_museo.png" alt="Museo exterior">
+      <div class="swap-dots">
+        <span class="swap-dot active"></span>
+        <span class="swap-dot"></span>
+        <span class="swap-dot"></span>
+      </div>
+    </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Municipio de Casas Grandes" data-en="📍 Casas Grandes Municipality">📍 Municipio de Casas Grandes</span>
+          <h3 class="pc-name l">Zona Arqueol&oacute;gica de Paqu&iacute;me</h3>
+          <p class="pc-desc s" data-es="Patrimonio de la Humanidad UNESCO. La gran ciudad del norte con museo de clase mundial incluido." data-en="UNESCO World Heritage Site. The great northern city with a world-class museum included.">Patrimonio de la Humanidad UNESCO. La gran ciudad del norte con museo de clase mundial incluido.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+<div class="mi-swap" style="height:260px;" data-multi="1">
+      <img class="visible" src="./img/pages/casa_botellas_noche.png" alt="Casa Botellas noche">
+      <img src="./img/pages/casa_botellas_dia.png" alt="Casa Botellas día">
+      <img src="./img/pages/casa_botellas_interior.png" alt="Interior botellas">
+      <div class="swap-dots">
+        <span class="swap-dot active"></span>
+        <span class="swap-dot"></span>
+        <span class="swap-dot"></span>
+      </div>
+    </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Nuevo Casas Grandes" data-en="📍 Nuevo Casas Grandes">📍 Nuevo Casas Grandes</span>
+          <h3 class="pc-name l">Casa de las Botellas</h3>
+          <p class="pc-desc s" data-es="Miles de botellas de vidrio forman paredes y techo de esta obra &uacute;nica. De noche se ilumina con colores que cortan el aliento." data-en="Thousands of glass bottles form the walls and roof of this unique work. At night it lights up with breathtaking colors.">Miles de botellas de vidrio forman paredes y techo de esta obra &uacute;nica. De noche se ilumina con colores que cortan el aliento.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+<div class="mi-swap" style="height:260px;" data-multi="1">
+      <img class="visible" src="./img/pages/ojo_vareno_alberca.png" alt="Ojo Vareleño alberca">
+      <img src="./img/pages/ojo_vareno_jardin.png" alt="Ojo Vareño jardín">
+      <img src="./img/pages/ojo_vareno_rio.png" alt="Ojo Vareño río">
+      <div class="swap-dots">
+        <span class="swap-dot active"></span>
+        <span class="swap-dot"></span>
+        <span class="swap-dot"></span>
+      </div>
+    </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Casas Grandes &middot; Solo verano" data-en="📍 Casas Grandes &middot; Summer only">📍 Casas Grandes &middot; Solo verano</span>
+          <h3 class="pc-name l">Ojo Vare&ntilde;o</h3>
+          <p class="pc-desc s" data-es="Manantial natural perfecto para refrescarse. Albercas cristalinas rodeadas de &aacute;lamos y jard&iacute;n con riachuelo. El lugar favorito de las familias en verano." data-en="A natural spring perfect for cooling off. Crystal-clear pools surrounded by poplar trees and a garden with a stream. The family favorite in summer.">Manantial natural perfecto para refrescarse. Albercas cristalinas rodeadas de &aacute;lamos y jard&iacute;n con riachuelo. El lugar favorito de las familias en verano.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1"><img class="visible" src="./img/pages/cg_callejon_beso.png" alt="Callejón del Beso"><div class="swap-dots"><span class="swap-dot active"></span></div></div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="pc-name l">Callej&oacute;n del Beso</h3>
+          <p class="pc-desc s" data-es="Rinc&oacute;n peque&ntilde;o y rom&aacute;ntico en el coraz&oacute;n del pueblo. El lugar favorito para las fotos en pareja y una parada infaltable en el recorrido." data-en="A small romantic corner in the heart of the town. The favorite spot for couples photos and a must-stop on any tour.">Rinc&oacute;n peque&ntilde;o y rom&aacute;ntico en el coraz&oacute;n del pueblo. El lugar favorito para las fotos en pareja y una parada infaltable en el recorrido.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel light" id="cg-hospedaje" style="display:none;">
+    <span class="s-lbl brown">Casas Grandes</span>
+    <h2 class="s-title dark" data-es="D&oacute;nde <span>Hospedarse</span>" data-en="Where to <span>Stay</span>">D&oacute;nde <span>Hospedarse</span></h2>
+    <div class="grid">
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/guacamayas_exterior.png" alt="Las Guacamayas exterior"><img class="img-b" src="./img/pages/guacamayas_interior.png" alt="Las Guacamayas interior"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Hotel Las Guacamayas</h3>
+          <p class="hc-desc" data-es="Boutique en adobe con patios empedrados. Dise&ntilde;ado con influencia paqu&iacute;me, respira la esencia cultural de la regi&oacute;n." data-en="Adobe boutique with cobblestone patios. Designed with Paquimé influence, it breathes the cultural essence of the region.">Boutique en adobe con patios empedrados. Dise&ntilde;ado con influencia paqu&iacute;me, respira la esencia cultural de la regi&oacute;n.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Adobe Boutique" data-en="Adobe Boutique">Adobe Boutique</span><span class="hc-tag" data-es="Arte Paqu&iacute;me" data-en="Paquimé Art">Arte Paqu&iacute;me</span><span class="hc-tag" data-es="Patio Colonial" data-en="Colonial Patio">Patio Colonial</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/casa_nopal_fachada.png" alt="Casa del Nopal fachada"><img class="img-b" src="./img/pages/casa_nopal_habitacion.png" alt="Casa del Nopal habitación"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Casa del Nopal</h3>
+          <p class="hc-desc" data-es="Vigas de madera, sarapes y decoraci&oacute;n artesanal. Ambiente c&aacute;lido y aut&eacute;nticamente norte&ntilde;o." data-en="Wooden beams, sarapes and artisan decor. Warm and authentically northern atmosphere.">Vigas de madera, sarapes y decoraci&oacute;n artesanal. Ambiente c&aacute;lido y aut&eacute;nticamente norte&ntilde;o.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Boutique" data-en="Boutique">Boutique</span><span class="hc-tag" data-es="Artesanal" data-en="Artisan">Artesanal</span><span class="hc-tag" data-es="&Iacute;ntimo" data-en="Intimate">&Iacute;ntimo</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/pueblo_soul_camino.png" alt="Pueblo del Soul camino"><img class="img-b" src="./img/pages/pueblo_soul_fachada.png" alt="Pueblo del Soul fachada"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Pueblo del Soul</h3>
+          <p class="hc-desc" data-es="Adobe contempor&aacute;neo con muros de piedra volc&aacute;nica. Habitaciones amplias con vista al desierto chihuahuense." data-en="Contemporary adobe with volcanic stone walls. Spacious rooms with views of the Chihuahuan desert.">Adobe contempor&aacute;neo con muros de piedra volc&aacute;nica. Habitaciones amplias con vista al desierto chihuahuense.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Contempor&aacute;neo" data-en="Contemporary">Contempor&aacute;neo</span><span class="hc-tag" data-es="Vista Desierto" data-en="Desert View">Vista Desierto</span><span class="hc-tag" data-es="Piedra Volc&aacute;nica" data-en="Volcanic Stone">Piedra Volc&aacute;nica</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img"><img src="./img/pages/posada_amparo.png" alt="Posada de Amparo"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Posada de Amparo</h3>
+          <p class="hc-desc" data-es="Jardines, fuente colonial y arquitectura colorida. Ambiente familiar ideal para toda la familia." data-en="Gardens, colonial fountain and colorful architecture. Ideal family atmosphere for the whole family.">Jardines, fuente colonial y arquitectura colorida. Ambiente familiar ideal para toda la familia.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Jard&iacute;n" data-en="Garden">Jard&iacute;n</span><span class="hc-tag" data-es="Fuente" data-en="Fountain">Fuente</span><span class="hc-tag" data-es="Familiar" data-en="Family-friendly">Familiar</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/vientos_fachada.png" alt="Casa de los Vientos fachada"><img class="img-b" src="./img/pages/vientos_portal.png" alt="Casa de los Vientos portal"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Casa de los Vientos</h3>
+          <p class="hc-desc" data-es="Portal r&uacute;stico con enredaderas y mecedoras al atardecer. Ambiente rom&aacute;ntico perfecto para desconectarse." data-en="Rustic porch with ivy and rocking chairs at sunset. Romantic atmosphere perfect for disconnecting.">Portal r&uacute;stico con enredaderas y mecedoras al atardecer. Ambiente rom&aacute;ntico perfecto para desconectarse.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="R&uacute;stico" data-en="Rustic">R&uacute;stico</span><span class="hc-tag" data-es="Rom&aacute;ntico" data-en="Romantic">Rom&aacute;ntico</span><span class="hc-tag" data-es="Tranquilo" data-en="Peaceful">Tranquilo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel dark" id="cg-gastro" style="display:none;">
+    <span class="s-lbl gold" data-es="Sabores Locales" data-en="Local Flavors">Sabores Locales</span>
+    <h2 class="s-title light" data-es="Gastronom&iacute;a <span class="g">Recomendada</span>" data-en="Recommended <span class="g">Food</span>">Gastronom&iacute;a <span class="g">Recomendada</span></h2>
+    <div class="grid">
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/neveria_interior.png" alt="Nevería San Antonio interior"><img class="img-b" src="./img/pages/neveria_helado.png" alt="Nevería San Antonio helado"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🍦 Helados &middot; Paletas" data-en="🍦 Ice Cream &middot; Popsicles">🍦 Helados &middot; Paletas</span><h3 class="rc-name">Never&iacute;a San Antonio</h3><p class="rc-desc" data-es="La never&iacute;a m&aacute;s tradicional. Helados con cajeta y las famosas paletas de sotol. Un cl&aacute;sico infaltable." data-en="The most traditional ice cream shop. Ice cream with cajeta and the famous sotol popsicles. A must-have classic.">La never&iacute;a m&aacute;s tradicional. Helados con cajeta y las famosas paletas de sotol. Un cl&aacute;sico infaltable.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/tacos_fachada.png" alt="Tacos Pueblo Viejo fachada"><img class="img-b" src="./img/pages/tacos_comida.png" alt="Tacos Pueblo Viejo comida"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🌮 Tacos &middot; Cosom&eacute;" data-en="🌮 Tacos &middot; Broth">🌮 Tacos &middot; Cosom&eacute;</span><h3 class="rc-name">Tacos y Cosom&eacute; Pueblo Viejo</h3><p class="rc-desc" data-es="El rey de los cosaom&eacute;s. Caldos humeantes con tacos dorados, favorito para las noches fr&iacute;as del desierto." data-en="The king of consommés. Steaming broths with golden tacos, a favorite for cold desert nights.">El rey de los cosaom&eacute;s. Caldos humeantes con tacos dorados, favorito para las noches fr&iacute;as del desierto.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/madre_mia_fachada.png" alt="Madre Mía fachada"><img class="img-b" src="./img/pages/madre_mia_comida.png" alt="Madre Mía comida"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🍳 Comida Casera" data-en="🍳 Home Cooking">🍳 Comida Casera</span><h3 class="rc-name">Madre M&iacute;a</h3><p class="rc-desc" data-es="Comida on the Plaza. Chilaquiles y platillos caseros junto a la plaza. El mejor desayuno de la zona." data-en="Food on the Plaza. Chilaquiles and homemade dishes next to the plaza. The best breakfast in the area.">Comida on the Plaza. Chilaquiles y platillos caseros junto a la plaza. El mejor desayuno de la zona.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/burritos_fachada.png" alt="Burritos Pueblo Viejo fachada"><img class="img-b" src="./img/pages/burritos_interior.png" alt="Burritos Pueblo Viejo interior"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🌯 Burritos Norte&ntilde;os" data-en="🌯 Northern Burritos">🌯 Burritos Norte&ntilde;os</span><h3 class="rc-name">Burritos Pueblo Viejo</h3><p class="rc-desc" data-es="Los burritos m&aacute;s aut&eacute;nticos. Tortilla de harina grande con frijoles y carne. Interior con vigas de madera." data-en="The most authentic burritos. Large flour tortilla with beans and meat. Interior with wooden beams.">Los burritos m&aacute;s aut&eacute;nticos. Tortilla de harina grande con frijoles y carne. Interior con vigas de madera.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/mariscos_fachada.png" alt="Pinchis Mariscos fachada"><img class="img-b" src="./img/pages/mariscos_ceviche.png" alt="Pinchis Mariscos ceviche"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🦐 Mariscos &middot; Ceviches" data-en="🦐 Seafood &middot; Ceviches">🦐 Mariscos &middot; Ceviches</span><h3 class="rc-name">Los Pinchis Mariscos</h3><p class="rc-desc" data-es="Ceviches frescos, campechanas y aguachiles en el desierto. La primera cheve por su cuenta. Lun&ndash;Dom 8am&ndash;10pm." data-en="Fresh ceviches, campechanas and aguachiles in the desert. First beer on the house. Mon–Sun 8am–10pm.">Ceviches frescos, campechanas y aguachiles en el desierto. La primera cheve por su cuenta. Lun&ndash;Dom 8am&ndash;10pm.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/chumita_fachada.png" alt="Tortas El Chumita fachada"><img class="img-b" src="./img/pages/chumita_tortas.png" alt="Tortas El Chumita tortas"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🥖 Tortas &middot; Tostadas" data-en="🥖 Sandwiches &middot; Tostadas">🥖 Tortas &middot; Tostadas</span><h3 class="rc-name">Tortas &ldquo;El Chumita&rdquo;</h3><p class="rc-desc" data-es="La fachada azul es un punto de referencia. Tortas y tostadas al momento. Si la ves, para el carro." data-en="The blue facade is a landmark. Sandwiches and tostadas made to order. If you see it, stop the car.">La fachada azul es un punto de referencia. Tortas y tostadas al momento. Si la ves, para el carro.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/pizza_kuira_fachada.png" alt="Pizza Kuira Ba fachada"><img class="img-b" src="./img/pages/pizza_kuira_pizza.png" alt="Pizza Kuira Ba pizza"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🍕 Pizzer&iacute;a Artesanal" data-en="🍕 Artisan Pizzeria">🍕 Pizzer&iacute;a Artesanal</span><h3 class="rc-name">Pizza Kuira Ba</h3><p class="rc-desc" data-es="Del horno a tu hogar. Pizzas artesanales con masa fresca. Nombre en rar&aacute;muri con sabor local &uacute;nico." data-en="From the oven to your table. Artisan pizzas with fresh dough. Name in Rarámuri with a unique local flavor.">Del horno a tu hogar. Pizzas artesanales con masa fresca. Nombre en rar&aacute;muri con sabor local &uacute;nico.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel warm" id="cg-arte" style="display:none;">
+    <span class="s-lbl brown" data-es="Ll&eacute;vate un Recuerdo" data-en="Take a Souvenir">Ll&eacute;vate un Recuerdo</span>
+    <h2 class="s-title dark" data-es="Artesan&iacute;as y <span>Compras</span>" data-en="Crafts &amp; <span>Shopping</span>">Artesan&iacute;as y <span>Compras</span></h2>
+    <div class="grid">
+      <div class="hc fade-in">
+        <div class="hc-img"><img src="./img/pages/artesanias_pueblo_viejo.png" alt="Artesanías Pueblo Viejo"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Artesan&iacute;as Pueblo Viejo</h3>
+          <p class="hc-desc" data-es="Cer&aacute;mica de Mata Ortiz, joyer&iacute;a, textiles y souvenirs. Piezas de artesanos locales a precios justos." data-en="Mata Ortiz ceramics, jewelry, textiles and souvenirs. Pieces from local artisans at fair prices.">Cer&aacute;mica de Mata Ortiz, joyer&iacute;a, textiles y souvenirs. Piezas de artesanos locales a precios justos.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Cer&aacute;mica" data-en="Ceramics">Cer&aacute;mica</span><span class="hc-tag" data-es="Joyer&iacute;a" data-en="Jewelry">Joyer&iacute;a</span><span class="hc-tag" data-es="Textiles" data-en="Textiles">Textiles</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/cg_jamoncillos_1.png" alt="Jamoncillos fachada"><img class="img-b" src="./img/pages/cg_jamoncillos_2.png" alt="Jamoncillos dulces"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Casas Grandes" data-en="📍 Casas Grandes">📍 Casas Grandes</span>
+          <h3 class="hc-name">Jamoncillos del Pueblo</h3>
+          <p class="hc-desc" data-es="&ldquo;Los Tradicionales&rdquo;, el dulce artesanal m&aacute;s emblem&aacute;tico de la regi&oacute;n. Elaborados con leche y nuez de la sierra. El regalo perfecto para llevarte a casa." data-en=""Los Tradicionales", the most emblematic artisan sweet of the region. Made with milk and sierra walnuts. The perfect gift to take home.">&ldquo;Los Tradicionales&rdquo;, el dulce artesanal m&aacute;s emblem&aacute;tico de la regi&oacute;n. Elaborados con leche y nuez de la sierra. El regalo perfecto para llevarte a casa.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Dulce Artesanal" data-en="Artisan Sweet">Dulce Artesanal</span><span class="hc-tag" data-es="Tradicional" data-en="Traditional">Tradicional</span><span class="hc-tag" data-es="Nuez Sierra" data-en="Sierra Walnut">Nuez Sierra</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page" id="p-cj">
+  <div class="zone-hero">
+    <img class="zone-hero-img" src="./img/pages/card_colonia_juarez.png" alt="Colonia Juárez">
+    <div class="zone-hero-overlay"></div>
+    <div class="zone-hero-body">
+      <span class="zone-hero-tag" data-es="Colonia Hist&oacute;rica &middot; 1885" data-en="Historic Colony &middot; 1885">Colonia Hist&oacute;rica &middot; 1885</span>
+      <h1 class="zone-hero-title">Colonia <span>Ju&aacute;rez</span></h1>
+      <p class="zone-hero-desc">Fundada por colonos mormones en 1885. Tirolesa, r&iacute;o, puente de los candados y m&aacute;s.</p>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs-cj"><button class="tab-btn active" onclick="switchTab('cj','lugares',this)" data-es="📍 Lugares" data-en="📍 Places">📍 Lugares</button><button class="tab-btn " onclick="switchTab('cj','hospedaje',this)" data-es="🏨 Hospedaje" data-en="🏨 Lodging">🏨 Hospedaje</button></div>
+  </div>
+  
+  <div class="tab-panel dark active" id="cj-lugares" style="display:block;">
+    <span class="s-lbl gold">Colonia Ju&aacute;rez</span>
+    <h2 class="s-title light" data-es="Lugares que <span class="g">Visitar</span>" data-en="Places to <span class="g">Visit</span>">Lugares que <span class="g">Visitar</span></h2>
+    <div class="grid">
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1"><img class="visible" src="./img/pages/cj_tirolesa_1.png" alt="Tirolesa"><img src="./img/pages/cj_tirolesa_2.png" alt="Tirolesa zona"><img src="./img/pages/cj_tirolesa_3.png" alt="Tirolesa actividades"><div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span><span class="swap-dot"></span></div></div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">La Tirolesa</h3>
+          <p class="pc-desc s" data-es="Actividad de aventura donde te deslizas por un cable sobre el paisaje de la colonia. Una experiencia de adrenalina con vistas espectaculares." data-en="An adventure activity where you zip along a cable over the colony landscape. An adrenaline experience with spectacular views.">Actividad de aventura donde te deslizas por un cable sobre el paisaje de la colonia. Una experiencia de adrenalina con vistas espectaculares.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/cj_rio.png" alt="El Río otoño">
+          <div class="swap-dots"><span class="swap-dot active"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">El R&iacute;o</h3>
+          <p class="pc-desc s" data-es="Espacio natural para relajarse, nadar y convivir. Rodeado de &aacute;lamos dorados en oto&ntilde;o, es uno de los rincones m&aacute;s bellos de la colonia." data-en="A natural space to relax, swim and socialize. Surrounded by golden poplars in autumn, it is one of the most beautiful corners of the colony.">Espacio natural para relajarse, nadar y convivir. Rodeado de &aacute;lamos dorados en oto&ntilde;o, es uno de los rincones m&aacute;s bellos de la colonia.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1"><img class="visible" src="./img/pages/cj_osos_tallados.png" alt="Osos tallados en madera"><div class="swap-dots"><span class="swap-dot active"></span></div></div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">Osos Tallados en Madera</h3>
+          <p class="pc-desc s" data-es="Figuras artesanales hechas a mano por talentosos artesanos locales. Piezas &uacute;nicas muy representativas del lugar, perfectas como recuerdo." data-en="Handcrafted figures made by talented local artisans. Unique pieces very representative of the place, perfect as a souvenir.">Figuras artesanales hechas a mano por talentosos artesanos locales. Piezas &uacute;nicas muy representativas del lugar, perfectas como recuerdo.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/cj_puente_candados_1.png" alt="Puente candados">
+          <img src="./img/pages/cj_puente_candados_2.png" alt="Puente desde el río">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">Puente de los Candados</h3>
+          <p class="pc-desc s" data-es="Puente colgante donde las parejas dejan candados como s&iacute;mbolo de amor. Una tradici&oacute;n rom&aacute;ntica con vistas al r&iacute;o y a la naturaleza." data-en="A suspension bridge where couples leave padlocks as a symbol of love. A romantic tradition with views of the river and nature.">Puente colgante donde las parejas dejan candados como s&iacute;mbolo de amor. Una tradici&oacute;n rom&aacute;ntica con vistas al r&iacute;o y a la naturaleza.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1"><img class="visible" src="./img/pages/cj_cascada_salitre.png" alt="Cascada El Salitre"><div class="swap-dots"><span class="swap-dot active"></span></div></div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">Cascada El Salitre</h3>
+          <p class="pc-desc s" data-es="Imponente ca&iacute;da de agua rodeada de vegetaci&oacute;n exuberante. Un atractivo natural &uacute;nico en la colonia, ideal para visitar en familia y disfrutar del paisaje serrano." data-en="An impressive waterfall surrounded by lush vegetation. A unique natural attraction in the colony, ideal for a family visit and enjoying the mountain scenery.">Imponente ca&iacute;da de agua rodeada de vegetaci&oacute;n exuberante. Un atractivo natural &uacute;nico en la colonia, ideal para visitar en familia y disfrutar del paisaje serrano.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/cj_areas_verdes_1.png" alt="Áreas verdes">
+          <img src="./img/pages/cj_areas_verdes_2.png" alt="Templo mormón">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="pc-name l">&Aacute;reas Verdes</h3>
+          <p class="pc-desc s" data-es="Espacios tranquilos para descansar y disfrutar la naturaleza. Jardines bien cuidados que conviven con la arquitectura fundada por colonos mormones en 1885." data-en="Quiet spaces to rest and enjoy nature. Well-kept gardens coexisting with the architecture founded by Mormon settlers in 1885.">Espacios tranquilos para descansar y disfrutar la naturaleza. Jardines bien cuidados que conviven con la arquitectura fundada por colonos mormones en 1885.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel light" id="cj-hospedaje" style="display:none;">
+    <span class="s-lbl brown">Colonia Ju&aacute;rez</span>
+    <h2 class="s-title dark" data-es="D&oacute;nde <span>Hospedarse</span>" data-en="Where to <span>Stay</span>">D&oacute;nde <span>Hospedarse</span></h2>
+    <div class="grid">
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/cj_rincon_paraiso_1.png" alt="Rincón Paraíso exterior"><img class="img-b" src="./img/pages/cj_rincon_paraiso_2.png" alt="Rincón Paraíso alberca"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Colonia Ju&aacute;rez" data-en="📍 Colonia Juárez">📍 Colonia Ju&aacute;rez</span>
+          <h3 class="hc-name">Hotel Rinc&oacute;n Para&iacute;so</h3>
+          <p class="hc-desc" data-es="Amplio hotel con alberca exterior rodeada de jardines. El lugar ideal para descansar despu&eacute;s de explorar la colonia y sus alrededores." data-en="Spacious hotel with outdoor pool surrounded by gardens. The ideal place to rest after exploring the colony and its surroundings.">Amplio hotel con alberca exterior rodeada de jardines. El lugar ideal para descansar despu&eacute;s de explorar la colonia y sus alrededores.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Alberca" data-en="Pool">Alberca</span><span class="hc-tag" data-es="Jardines" data-en="Gardens">Jardines</span><span class="hc-tag" data-es="Familiar" data-en="Family-friendly">Familiar</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="page" id="p-mo">
+  <div class="zone-hero">
+    <img class="zone-hero-img" src="./img/pages/card_mata_ortiz.png" alt="Juan Mata Ortiz">
+    <div class="zone-hero-overlay"></div>
+    <div class="zone-hero-body">
+      <span class="zone-hero-tag" data-es="Arte &amp; Cer&aacute;mica" data-en="Art &amp; Ceramics">Arte &amp; Cer&aacute;mica</span>
+      <h1 class="zone-hero-title">Juan Mata <span>Ortiz</span></h1>
+      <p class="zone-hero-desc">400 artesanos que resucitaron la cer&aacute;mica paqu&iacute;me. La artesan&iacute;a m&aacute;s fina de Am&eacute;rica del Norte.</p>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs-mo"><button class="tab-btn active" onclick="switchTab('mo','lugares',this)" data-es="📍 Lugares" data-en="📍 Places">📍 Lugares</button><button class="tab-btn " onclick="switchTab('mo','hospedaje',this)" data-es="🏨 Hospedaje" data-en="🏨 Lodging">🏨 Hospedaje</button><button class="tab-btn " onclick="switchTab('mo','gastro',this)" data-es="🍽️ Restaurantes" data-en="🍽️ Restaurants">🍽️ Restaurantes</button></div>
+  </div>
+  
+  <div class="tab-panel dark active" id="mo-lugares" style="display:block;">
+    <span class="s-lbl gold">Juan Mata Ortiz</span>
+    <h2 class="s-title light" data-es="Lugares que <span class="g">Visitar</span>" data-en="Places to <span class="g">Visit</span>">Lugares que <span class="g">Visitar</span></h2>
+    <div class="grid">
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/mo_estacion_1.png" alt="Estación frente">
+          <img src="./img/pages/mo_estacion_2.png" alt="Estación banca">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Juan Mata Ortiz" data-en="📍 Juan Mata Ortiz">📍 Juan Mata Ortiz</span>
+          <h3 class="pc-name l">La Estaci&oacute;n</h3>
+          <p class="pc-desc s" data-es="Punto hist&oacute;rico relacionado con el tren y el desarrollo del pueblo. Restaurada y decorada con murales de cer&aacute;mica paqu&iacute;me, es hoy s&iacute;mbolo del pueblo." data-en="A historic landmark tied to the railway and the town's development. Restored and decorated with Paquimé ceramic murals, it is today a symbol of the town.">Punto hist&oacute;rico relacionado con el tren y el desarrollo del pueblo. Restaurada y decorada con murales de cer&aacute;mica paqu&iacute;me, es hoy s&iacute;mbolo del pueblo.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/mo_galeria_1.png" alt="Juan Quezada">
+          <img src="./img/pages/mo_galeria_2.png" alt="Galería interior">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Juan Mata Ortiz" data-en="📍 Juan Mata Ortiz">📍 Juan Mata Ortiz</span>
+          <h3 class="pc-name l">Galer&iacute;a de Juan Quezada</h3>
+          <p class="pc-desc s" data-es="El maestro que resucit&oacute; la cer&aacute;mica paqu&iacute;me. Su galer&iacute;a exhibe piezas aut&eacute;nticas que llegan a museos de todo el mundo. Una visita obligada." data-en="The master who revived Paquimé ceramics. His gallery displays authentic pieces that reach museums around the world. A must-visit.">El maestro que resucit&oacute; la cer&aacute;mica paqu&iacute;me. Su galer&iacute;a exhibe piezas aut&eacute;nticas que llegan a museos de todo el mundo. Una visita obligada.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/mo_puente_fierro_1.png" alt="Puente de Fierro">
+          <img src="./img/pages/mo_puente_fierro_2.png" alt="Vista desde el puente">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 Juan Mata Ortiz" data-en="📍 Juan Mata Ortiz">📍 Juan Mata Ortiz</span>
+          <h3 class="pc-name l">Puente de Fierro</h3>
+          <p class="pc-desc s" data-es="Estructura antigua de metal con gran valor hist&oacute;rico. Cruzarlo sobre el r&iacute;o con la sierra de fondo es una de las experiencias m&aacute;s fotogr&aacute;ficas del pueblo." data-en="An ancient metal structure of great historical value. Crossing it over the river with the sierra in the background is one of the most photogenic experiences in town.">Estructura antigua de metal con gran valor hist&oacute;rico. Cruzarlo sobre el r&iacute;o con la sierra de fondo es una de las experiencias m&aacute;s fotogr&aacute;ficas del pueblo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel light" id="mo-hospedaje" style="display:none;">
+    <span class="s-lbl brown">Juan Mata Ortiz</span>
+    <h2 class="s-title dark" data-es="D&oacute;nde <span>Hospedarse</span>" data-en="Where to <span>Stay</span>">D&oacute;nde <span>Hospedarse</span></h2>
+    <div class="grid">
+      <div class="hc fade-in">
+        <div class="hc-img img-wrap" style="height:230px;"><img class="img-a" src="./img/pages/mo_hotel_adobe_1.png" alt="Hotel Adobe jardín"><img class="img-b" src="./img/pages/mo_hotel_adobe_2.png" alt="Hotel Adobe portal"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Juan Mata Ortiz" data-en="📍 Juan Mata Ortiz">📍 Juan Mata Ortiz</span>
+          <h3 class="hc-name">Hotel Adobe</h3>
+          <p class="hc-desc" data-es="Hospedaje r&uacute;stico rodeado de jardines floridos y un portal de madera con vigas artesanales. Ambiente tranquilo y aut&eacute;ntico en el coraz&oacute;n del pueblo cer&aacute;mico." data-en="Rustic lodging surrounded by flower gardens and a wooden porch with artisan beams. Quiet and authentic atmosphere in the heart of the ceramic town.">Hospedaje r&uacute;stico rodeado de jardines floridos y un portal de madera con vigas artesanales. Ambiente tranquilo y aut&eacute;ntico en el coraz&oacute;n del pueblo cer&aacute;mico.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Adobe" data-en="Adobe">Adobe</span><span class="hc-tag" data-es="Jard&iacute;n" data-en="Garden">Jard&iacute;n</span><span class="hc-tag" data-es="R&uacute;stico" data-en="Rustic">R&uacute;stico</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel dark " id="mo-gastro" style="display:none;">
+    <span class="s-lbl gold">Juan Mata Ortiz</span>
+    <h2 class="s-title light" data-es="Gastronom&iacute;a <span class="g">Recomendada</span>" data-en="Recommended <span class="g">Food</span>">Gastronom&iacute;a <span class="g">Recomendada</span></h2>
+    <div class="grid">
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/mo_antojitos.png" alt="Antojitos Mexicanos fachada"><img class="img-b" src="./img/pages/mo_antojitos.png" alt="Antojitos Mexicanos"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🌮 Antojitos &middot; Desayunos" data-en="🌮 Snacks &middot; Breakfast">🌮 Antojitos &middot; Desayunos</span><h3 class="rc-name">Antojitos Mexicanos</h3><p class="rc-desc" data-es="Tacos, burritos, enchiladas, tortas, flautas y m&aacute;s. El favorito del pueblo. Mar&ndash;Vie 8am&ndash;4pm, S&aacute;b&ndash;Dom 8am&ndash;11pm. Tel: 636 179 5540." data-en="Tacos, burritos, enchiladas, sandwiches, flautas and more. The town favorite. Tue–Fri 8am–4pm, Sat–Sun 8am–11pm. Tel: 636 179 5540.">Tacos, burritos, enchiladas, tortas, flautas y m&aacute;s. El favorito del pueblo. Mar&ndash;Vie 8am&ndash;4pm, S&aacute;b&ndash;Dom 8am&ndash;11pm. Tel: 636 179 5540.</p></div>
+      </div>
+      <div class="rc fade-in">
+        <div class="rc-img img-wrap" style="height:200px;"><img class="img-a" src="./img/pages/mo_sazon_claudia.png" alt="El Sazón de Claudia"></div>
+        <div class="rc-body"><span class="rc-tag" data-es="🍽️ Comida Casera" data-en="🍽️ Home Cooking">🍽️ Comida Casera</span><h3 class="rc-name">El Saz&oacute;n de Claudia</h3><p class="rc-desc" data-es="Platillos caseros con el toque aut&eacute;ntico de Mata Ortiz. Comida norteña preparada con saz&oacute;n local en un ambiente c&aacute;lido y familiar." data-en="Homemade dishes with the authentic touch of Mata Ortiz. Northern food prepared with local seasoning in a warm, family atmosphere.">Platillos caseros con el toque aut&eacute;ntico de Mata Ortiz. Comida norteña preparada con saz&oacute;n local en un ambiente c&aacute;lido y familiar.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page" id="p-ls">
+  <div class="zone-hero">
+    <img class="zone-hero-img" src="./img/pages/card_la_sierra.png" alt="La Sierra">
+    <div class="zone-hero-overlay"></div>
+    <div class="zone-hero-body">
+      <span class="zone-hero-tag" data-es="Naturaleza &amp; Aventura" data-en="Nature &amp; Adventure">Naturaleza &amp; Aventura</span>
+      <h1 class="zone-hero-title">La <span>Sierra</span></h1>
+      <p class="zone-hero-desc">Ca&ntilde;ones, r&iacute;os cristalinos, arqueolog&iacute;a en acantilados y camping bajo las estrellas.</p>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs-ls"><button class="tab-btn active" onclick="switchTab('ls','lugares',this)" data-es="📍 Lugares" data-en="📍 Places">📍 Lugares</button><button class="tab-btn " onclick="switchTab('ls','hospedaje',this)" data-es="🏕️ Camping" data-en="🏕️ Camping">🏕️ Camping</button></div>
+  </div>
+  
+  <div class="tab-panel dark active" id="ls-lugares" style="display:block;">
+    <span class="s-lbl gold">La Sierra</span>
+    <h2 class="s-title light" data-es="Lugares que <span class="g">Explorar</span>" data-en="Places to <span class="g">Explore</span>">Lugares que <span class="g">Explorar</span></h2>
+    <div class="grid">
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/ls_cueva_olla_1.png" alt="Cueva de la Olla interior">
+          <img src="./img/pages/ls_cueva_olla_2.png" alt="Cueva de la Olla panorámica">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 La Sierra" data-en="📍 The Sierra">📍 La Sierra</span>
+          <h3 class="pc-name l">Cueva de la Olla</h3>
+          <p class="pc-desc s" data-es="Sitio arqueol&oacute;gico con una gran estructura en forma de olla dentro de una cueva. Vestigio de la civilizaci&oacute;n paqu&iacute;me en lo alto de los acantilados de la sierra." data-en="An archaeological site with a large pot-shaped structure inside a cave. A remnant of the Paquimé civilization high on the sierra cliffs.">Sitio arqueol&oacute;gico con una gran estructura en forma de olla dentro de una cueva. Vestigio de la civilizaci&oacute;n paqu&iacute;me en lo alto de los acantilados de la sierra.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/ls_willy_1.png" alt="El Willy río">
+          <img src="./img/pages/ls_willy_2.png" alt="El Willy cañón">
+          <img src="./img/pages/ls_willy_3.png" alt="El Willy letrero">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 La Sierra" data-en="📍 The Sierra">📍 La Sierra</span>
+          <h3 class="pc-name l">El Willy</h3>
+          <p class="pc-desc s" data-es="Zona natural con r&iacute;o cristalino ideal para acampar y disfrutar del paisaje serrano. Ca&ntilde;ones y vegetaci&oacute;n exuberante hacen de este lugar un para&iacute;so natural." data-en="A natural area with a crystal-clear river ideal for camping and enjoying the mountain scenery. Canyons and lush vegetation make this place a natural paradise.">Zona natural con r&iacute;o cristalino ideal para acampar y disfrutar del paisaje serrano. Ca&ntilde;ones y vegetaci&oacute;n exuberante hacen de este lugar un para&iacute;so natural.</p>
+        </div>
+      </div>
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1"><img class="visible" src="./img/pages/ls_caracol_1.png" alt="Mirador El Caracol letrero"><img src="./img/pages/ls_caracol_2.png" alt="Vista panorámica"><img src="./img/pages/ls_caracol_3.png" alt="Cañón El Caracol"><div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span><span class="swap-dot"></span></div></div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 La Sierra" data-en="📍 The Sierra">📍 La Sierra</span>
+          <h3 class="pc-name l">Mirador El Caracol</h3>
+          <p class="pc-desc s" data-es="Mirador con vistas panor&aacute;micas al desierto y los ca&ntilde;ones de la sierra. Uno de los puntos m&aacute;s fotogr&aacute;ficos de la regi&oacute;n, espectacular en cualquier &eacute;poca del a&ntilde;o." data-en="A viewpoint with panoramic views of the desert and the sierra canyons. One of the most photogenic spots in the region, spectacular at any time of year.">Mirador con vistas panor&aacute;micas al desierto y los ca&ntilde;ones de la sierra. Uno de los puntos m&aacute;s fotogr&aacute;ficos de la regi&oacute;n, espectacular en cualquier &eacute;poca del a&ntilde;o.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel light" id="ls-hospedaje" style="display:none;">
+    <span class="s-lbl brown">La Sierra</span>
+    <h2 class="s-title dark" data-es="D&oacute;nde <span>Hospedarse</span>" data-en="Where to <span>Stay</span>">D&oacute;nde <span>Hospedarse</span></h2>
+    <div class="grid">
+      <div class="hc fade-in">
+        <div class="hc-img"><img src="./img/pages/ls_camping_olla.png" alt="Camping Cueva de la Olla"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 Cueva de la Olla" data-en="📍 Cave of the Pot">📍 Cueva de la Olla</span>
+          <h3 class="hc-name" data-es="Camping Cueva de la Olla" data-en="Camping Cave of the Pot">Camping Cueva de la Olla</h3>
+          <p class="hc-desc" data-es="Acampa a los pies de uno de los sitios arqueol&oacute;gicos m&aacute;s impresionantes de la sierra. Noches bajo las estrellas en un entorno &uacute;nico e hist&oacute;rico." data-en="Camp at the foot of one of the most impressive archaeological sites in the sierra. Nights under the stars in a unique and historic setting.">Acampa a los pies de uno de los sitios arqueol&oacute;gicos m&aacute;s impresionantes de la sierra. Noches bajo las estrellas en un entorno &uacute;nico e hist&oacute;rico.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Camping" data-en="Camping">Camping</span><span class="hc-tag" data-es="Arqueol&oacute;gico" data-en="Archaeological">Arqueol&oacute;gico</span><span class="hc-tag" data-es="Estrellas" data-en="Stargazing">Estrellas</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img"><img src="./img/pages/ls_camping_willy.png" alt="Camping Río del Willy"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 El Willy" data-en="📍 El Willy">📍 El Willy</span>
+          <h3 class="hc-name" data-es="Camping R&iacute;o del Willy" data-en="Camping Willy River">Camping R&iacute;o del Willy</h3>
+          <p class="hc-desc" data-es="Acampa a la orilla del r&iacute;o con el sonido del agua y los ca&ntilde;ones de fondo. El lugar preferido para grupos que buscan aventura y naturaleza pura." data-en="Camp by the riverside with the sound of water and canyons in the background. The preferred spot for groups seeking adventure and pure nature.">Acampa a la orilla del r&iacute;o con el sonido del agua y los ca&ntilde;ones de fondo. El lugar preferido para grupos que buscan aventura y naturaleza pura.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Camping" data-en="Camping">Camping</span><span class="hc-tag" data-es="R&iacute;o" data-en="River">R&iacute;o</span><span class="hc-tag" data-es="Aventura" data-en="Adventure">Aventura</span></div>
+        </div>
+      </div>
+      <div class="hc fade-in">
+        <div class="hc-img"><img src="./img/pages/ls_casas_willy.png" alt="Willy Cowboy Town"></div>
+        <div class="hc-body">
+          <span class="hc-zone" data-es="📍 El Willy" data-en="📍 El Willy">📍 El Willy</span>
+          <h3 class="hc-name">Willy Cowboy Town</h3>
+          <p class="hc-desc" data-es="Cabañas r&uacute;sticas de madera con estilo vaquero en plena sierra. El lugar perfecto para desconectarse y disfrutar de la naturaleza serrana en familia o con amigos." data-en="Rustic wooden cabins with cowboy style in the heart of the sierra. The perfect place to disconnect and enjoy mountain nature with family or friends.">Cabañas r&uacute;sticas de madera con estilo vaquero en plena sierra. El lugar perfecto para desconectarse y disfrutar de la naturaleza serrana en familia o con amigos.</p>
+          <div class="hc-tags"><span class="hc-tag" data-es="Casa Rural" data-en="Rural Cabin">Casa Rural</span><span class="hc-tag" data-es="Familiar" data-en="Family-friendly">Familiar</span><span class="hc-tag" data-es="Sierra" data-en="Sierra">Sierra</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page" id="p-sd">
+  <div class="zone-hero">
+    <img class="zone-hero-img" src="./img/pages/card_san_diego.png" alt="San Diego">
+    <div class="zone-hero-overlay"></div>
+    <div class="zone-hero-body">
+      <span class="zone-hero-tag" data-es="Historia &amp; Campo" data-en="History &amp; Countryside">Historia &amp; Campo</span>
+      <h1 class="zone-hero-title">San <span>Diego</span></h1>
+      <p class="zone-hero-desc">Un rinc&oacute;n hist&oacute;rico del municipio con la imponente Hacienda de San Diego.</p>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs-sd"><button class="tab-btn active" onclick="switchTab('sd','lugares',this)" data-es="📍 Lugares" data-en="📍 Places">📍 Lugares</button></div>
+  </div>
+  
+  <div class="tab-panel dark active" id="sd-lugares" style="display:block;">
+    <span class="s-lbl gold">San Diego</span>
+    <h2 class="s-title light" data-es="Lugares que <span class="g">Visitar</span>" data-en="Places to <span class="g">Visit</span>">Lugares que <span class="g">Visitar</span></h2>
+    <div class="grid">
+      <div class="pc dk fade-in">
+        <div class="mi-swap" style="height:260px;" data-multi="1">
+          <img class="visible" src="./img/pages/sd_hacienda_1.png" alt="Hacienda aérea">
+          <img src="./img/pages/sd_hacienda_2.png" alt="Hacienda fachada">
+          <img src="./img/pages/sd_hacienda_3.png" alt="Hacienda lateral">
+          <div class="swap-dots"><span class="swap-dot active"></span><span class="swap-dot"></span><span class="swap-dot"></span></div>
+        </div>
+        <div class="pc-body">
+          <span class="pc-zone g" data-es="📍 San Diego" data-en="📍 San Diego">📍 San Diego</span>
+          <h3 class="pc-name l">Hacienda de San Diego</h3>
+          <p class="pc-desc s" data-es="Construcci&oacute;n antigua que muestra c&oacute;mo se viv&iacute;a en &eacute;pocas pasadas. Su arquitectura de cantera y arcos de estilo porfiriano la convierten en un tesoro hist&oacute;rico del municipio." data-en="An ancient construction that shows how people lived in past eras. Its quarry stone architecture and Porfirian-style arches make it a historic treasure of the municipality.">Construcci&oacute;n antigua que muestra c&oacute;mo se viv&iacute;a en &eacute;pocas pasadas. Su arquitectura de cantera y arcos de estilo porfiriano la convierten en un tesoro hist&oacute;rico del municipio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <img src="./img/logo.png" style="height:70px;margin-bottom:1rem;opacity:0.9;" alt="Turistiando CG">
+  <p style="font-size:0.82rem;color:var(--arena);line-height:1.8;max-width:500px;margin:0 auto 1rem;"><span data-es="Tu guía de turismo en el municipio de Casas Grandes, Chihuahua." data-en="Your tourism guide in the municipality of Casas Grandes, Chihuahua.">Tu guía de turismo en el municipio de Casas Grandes, Chihuahua.</span></p>
+  <p style="font-family:'Unbounded',sans-serif;font-size:0.46rem;letter-spacing:0.2em;color:rgba(212,184,150,0.35);text-transform:uppercase;">Turistiando CG &middot; Casas Grandes &middot; Chihuahua &middot; M&eacute;xico</p>
+</footer>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
